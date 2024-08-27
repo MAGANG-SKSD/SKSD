@@ -70,6 +70,8 @@
                     <th>Ditambahkan pada</th>
                     <th>Diperbarui pada</th>
                     <th>Detail Jenis Anggaran</th>
+                    <th>Status</th>
+                    <th>Konfirmasi</th>
                 </thead>
                 <tbody class="text-center">
                     @forelse ($anggaran_realisasi as $item)
@@ -83,15 +85,21 @@
                             <td>Rp. {{ substr(number_format($item->nilai_realisasi, 2, ',', '.'),0,-3) }}</td>
                             <td>{{ date('d/m/Y H:i:s', strtotime($item->created_at)) }}</td>
                             <td>{{ date('d/m/Y H:i:s', strtotime($item->updated_at)) }}</td>
+                            <td>Rp. {{ substr(number_format($item->jenis_anggaran, 2, ',', '.'),0,-3) }}</td>
+                            <td>{{ $item->status }}</td> <!-- Hapus kelas tambahan jika tidak diperlukan -->
+                            <td>{{ $item->konfirmasi }}</td> <!-- Hapus kelas tambahan jika tidak diperlukan -->
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" align="center">Data tidak tersedia</td>
+                            <td colspan="9" align="center">Data tidak tersedia</td> <!-- Sesuaikan kolspan menjadi 9 -->
                         </tr>
                     @endforelse
                 </tbody>
+                
+                
             </table>
         </div>
+        
         {{ $anggaran_realisasi->links() }}
     </div>
 </div>
