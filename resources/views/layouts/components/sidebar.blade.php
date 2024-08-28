@@ -114,6 +114,7 @@
                     <span class="nav-link-inner--text">Kelola Informasi Pemerintahan Desa</span>
                 </a>
             </li> --}}
+            @if(Auth::user()->role == 'administrator')
             <li class="nav-item">
                 <a class="nav-link @if (Request::segment(1) == 'kelola-hak-akses' || Request::segment(1) == 'tambah-hak-akses' || Request::segment(1) == 'hak-akses') active @endif"
                     href="{{ route('hak-akses.index') }}">
@@ -136,6 +137,7 @@
                     <span class="nav-link-inner--text">Kelola Slider</span>
                 </a>
             </li>
+            @endif
         </ul>
         <hr class="my-3">
         <ul class="navbar-nav">
