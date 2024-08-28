@@ -67,6 +67,34 @@
                             </select>
                             @error('jenis_anggaran') <span class="invalid-feedback font-weight-bold">{{ $message }}</span> @enderror
                         </div>
+                        
+{{-- Penambahan Baru input ketikan --}}
+                        <div class="form-group col-md-5">
+                            <label class="form-control-label">Desa</label>
+                            <input type="text" class="form-control @error('desa') is-invalid @enderror" name="desa" id="desa" placeholder="Masukkan Nama Desa ..." value="{{ old('desa') }}">
+                            @error('desa') <span class="invalid-feedback font-weight-bold">{{ $message }}</span> @enderror
+                        </div>
+
+                        <div class="form-group col-md-5">
+                            <label class="form-control-label">Kecamatan</label>
+                            <input type="text" class="form-control @error('kecamatan') is-invalid @enderror" name="kecamatan" id="kecamatan" placeholder="Masukkan Nama kecamatan ..." value="{{ old('kecamatan') }}">
+                            @error('kecamatan') <span class="invalid-feedback font-weight-bold">{{ $message }}</span> @enderror
+                        </div>
+
+{{-- Jika Kecamatan Menggunakan Database  --}}
+                        {{-- <div class="form-group col-md-5">
+                            <label class="form-control-label">Kecamatan</label>
+                            <select class="form-control @error('kecamatan_id') is-invalid @enderror" name="kecamatan_id" id="kecamatan_id">
+                                <option value="" selected disabled>Pilih Kecamatan</option>
+                                @foreach ($kecamatan as $item)
+                                    <option value="{{ $item->id }}" {{ old('kecamatan_id') == $item->id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                @endforeach
+                            </select>
+                            @error('kecamatan_id') <span class="invalid-feedback font-weight-bold">{{ $message }}</span> @enderror
+                        </div> --}}
+{{--  --}}
+                        
+                    
                         <div class="form-group col-md-5">
                             <label class="form-control-label">Detail Jenis Anggaran</label>
                             <select class="form-control @error('detail_jenis_anggaran_id') is-invalid @enderror" name="detail_jenis_anggaran_id" id="detail_jenis_anggaran_id" value="{{ old('detail_jenis_anggaran_id') }}">

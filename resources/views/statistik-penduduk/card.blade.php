@@ -1,4 +1,4 @@
-<div class="col-md-12 mb-4">
+{{-- <div class="col-md-12 mb-4">
     <div class="card shadow h-100">
         <div class="card-body">
             <div class="nav-wrapper">
@@ -117,4 +117,4 @@
             <div id="chart-pekerjaan" style="height: 400px; margin: 0 auto"></div>
         </div>
     </div>
-</div>
+</div> --}}

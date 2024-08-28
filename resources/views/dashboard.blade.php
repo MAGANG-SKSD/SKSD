@@ -18,78 +18,6 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Kepala Keluarga</h5>
-                                <span class="h2 font-weight-bold mb-0">{{ $totalPenduduk->where('status_hubungan_dalam_keluarga_id',1)->count() }}</span>
-                            </div>
-                            <div class="col-auto">
-                                <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-sm-6 mb-3">
-                <div class="card card-stats shadow h-100">
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <h5 class="card-title text-uppercase text-muted mb-0">Total Penduduk</h5>
-                                <span class="h2 font-weight-bold mb-0">{{ $totalPenduduk->count() }}</span>
-                            </div>
-                            <div class="col-auto">
-                                <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-sm-6 mb-3">
-                <div class="card card-stats shadow h-100">
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Laki-laki</h5>
-                                <span class="h2 font-weight-bold mb-0">{{ $totalPenduduk->where('jenis_kelamin',1)->count() }}</span>
-                            </div>
-                            <div class="col-auto">
-                                <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-sm-6 mb-3">
-                <div class="card card-stats shadow h-100">
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <h5 class="card-title text-uppercase text-muted mb-0">Jumlah Perempuan</h5>
-                                <span class="h2 font-weight-bold mb-0">{{ $totalPenduduk->where('jenis_kelamin',2)->count() }}</span>
-                            </div>
-                            <div class="col-auto">
-                                <div class="icon icon-shape bg-gradient-pink text-white rounded-circle shadow">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 col-sm-6 mb-3">
-                <div class="card card-stats shadow h-100">
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
                                 <h5 class="card-title text-uppercase text-muted mb-0">Total Cetak Surat Hari Ini</h5>
                                 <span class="h2 font-weight-bold mb-0">{{ $hari }}</span>
                             </div>
@@ -289,69 +217,7 @@
     };
 
     let chart_harian = Highcharts.chart('chart-harian', bar);
-    chart_harian.title.textSetter("Grafik Cetak Surat Harian");
-
     let chart_bulanan = Highcharts.chart('chart-bulanan', bar);
-    chart_bulanan.title.textSetter("Grafik Cetak Surat Bulanan");
-
     let chart_tahunan = Highcharts.chart('chart-tahunan', bar);
-    chart_tahunan.title.textSetter("Grafik Cetak Surat Tahunan");
-
-    $(document).ready(function(){
-        $("#loading-tanggal-surat").css('display','');
-        $("#loading-bulan-surat").css('display','');
-        $("#loading-tahun-surat").css('display','');
-        $("#tanggal").css('display','none');
-        $("#bulan").css('display','none');
-        $("#tahun").css('display','none');
-
-        $.get("{{ route('surat-harian') }}", function (response) {
-            $("#loading-tanggal-surat").css('display','none');
-            $("#tanggal").css('display','');
-            chart_harian.series[0].setData(response);
-        });
-
-        $.get("{{ route('surat-bulanan') }}", function (response) {
-            $("#loading-bulan-surat").css('display','none');
-            $("#bulan").css('display','');
-            chart_bulanan.series[0].setData(response);
-        });
-
-        $.get("{{ route('surat-tahunan') }}", function (response) {
-            $("#loading-tahun-surat").css('display','none');
-            $("#tahun").css('display','');
-            chart_tahunan.series[0].setData(response);
-        });
-
-        $("#tanggal").change(function () {
-            $("#loading-tanggal-surat").css('display','');
-            $("#tanggal").css('display','none');
-            $.get("{{ route('surat-harian') }}", {'tanggal': $(this).val()}, function (response) {
-                $("#tanggal").css('display','');
-                $("#loading-tanggal-surat").css('display','none');
-                chart_harian.series[0].setData(response);
-            });
-        });
-
-        $("#bulan").change(function () {
-            $("#loading-bulan-surat").css('display','');
-            $("#bulan").css('display','none');
-            $.get("{{ route('surat-bulanan') }}", {'bulan': $(this).val()}, function (response) {
-                $("#bulan").css('display','');
-                $("#loading-bulan-surat").css('display','none');
-                chart_bulanan.series[0].setData(response);
-            });
-        });
-
-        $("#tahun").change(function () {
-            $("#loading-tahun-surat").css('display','');
-            $("#tahun").css('display','none');
-            $.get("{{ route('surat-tahunan') }}", {'tahun': $(this).val()}, function (response) {
-                $("#tahun").css('display','');
-                $("#loading-tahun-surat").css('display','none');
-                chart_tahunan.series[0].setData(response);
-            });
-        });
-    });
 </script>
 @endpush
