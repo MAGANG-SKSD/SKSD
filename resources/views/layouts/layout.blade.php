@@ -167,9 +167,9 @@ $desa = App\Desa::find(1);
                                 {{-- <a href="{{ route('hak-akses.index') }}" class="dropdown-item">
                                     <i class="fas fa-fw fa-newspaper text-cyan"></i> Kelola Berita
                                 </a> --}}
-                                {{-- <a class="dropdown-item" href="{{ route('gallery.index') }}">
-                                    <i class="fas fa-fw fa-images text-orange"></i> Kelola Gallery
-                                </a> --}}
+                                <a class="dropdown-item" href="{{ route('dusun.index') }}">
+                                    <i class="fas fa-archive" style="color: rgb(16, 177, 161);"></i> Laporan Realisasi
+                                </a>
                                 <a class="dropdown-item" href="{{ route('slider.index') }}">
                                     <i class="fas fa-fw fa-images text-purple"></i> Kelola Slider
                                 </a>
