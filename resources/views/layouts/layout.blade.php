@@ -161,18 +161,24 @@ $desa = App\Desa::find(1);
                                 <a class="dropdown-item" href="{{ route('surat.index') }}">
                                     <i class="fas fa-fw fa-file-alt text-primary"></i> Kelola Surat
                                 </a>
-                                {{-- <a href="{{ route('pemerintahan-desa.index') }}" class="dropdown-item">
-                                    <i class="fas fa-fw fa-atlas text-success"></i> Kelola Informasi Pemerintahan Desa
-                                </a> --}}
+                                @if(Auth::user()->role == 'administrator')
+                                <a href="{{ route('hak-akses.index') }}" class="dropdown-item">
+                                    <i class="fas fa-fw fa-atlas text-success"></i> Kelola Hak Akses
+                                </a>
+                                @endif
                                 {{-- <a href="{{ route('hak-akses.index') }}" class="dropdown-item">
                                     <i class="fas fa-fw fa-newspaper text-cyan"></i> Kelola Berita
                                 </a> --}}
+                                @if(Auth::user()->role == 'administrator' || Auth::user()->role == 'lurah')
                                 <a class="dropdown-item" href="{{ route('dusun.index') }}">
                                     <i class="fas fa-archive" style="color: rgb(16, 177, 161);"></i> Laporan Realisasi
                                 </a>
+                                @endif
+                                @if(Auth::user()->role == 'administrator')
                                 <a class="dropdown-item" href="{{ route('slider.index') }}">
                                     <i class="fas fa-fw fa-images text-purple"></i> Kelola Slider
                                 </a>
+                                @endif
                                 <a class="dropdown-item" href="{{ route('profil-desa') }}">
                                     <i class="fas fa-fw fa-users text-info"></i> Profil Desa
                                 </a>
