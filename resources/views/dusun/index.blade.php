@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Laporan Realisasi')
+@section('title', 'Dusun')
 
 @section('styles')
 <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
@@ -23,7 +23,10 @@
                             <div class="mb-3">
                                 <h2 class="mb-0">Laporan Realisasi Desa</h2>
                                 <p class="mb-0 text-sm">Kelola Realisasi Desa</p>
-                            </div>  
+                            </div>
+                            <div class="mb-3">
+                                <a href="{{ route('dusun.create') }}" class="btn btn-success" title="Tambah"><i class="fas fa-plus"></i> Tambah Laporan</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,13 +63,49 @@
                         <th class="text-center">Laporan Terperinci</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <!-- Kosongkan isi tabel -->
-                    <tr>
-                        <td colspan="4" align="center">Data tidak tersedia</td>
-                    </tr>
+                
+                    @forelse ($dusun as $item)
+                    @empty
+                        <tr>
+                            <td colspan="15" align="center">Data tidak tersedia</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-hapus" tabindex="-1" role="dialog" aria-labelledby="modal-hapus" aria-hidden="true">
+    <div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+        <div class="modal-content bg-gradient-danger">
+
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-delete">Hapus Dusun?</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="py-3 text-center">
+                    <i class="ni ni-bell-55 ni-3x"></i>
+                    <h4 class="heading mt-4">Perhatian!!</h4>
+                    <p>Menghapus dusun akan menghapus semua data yang dimilikinya</p>
+                    <p><strong id="nama-hapus"></strong></p>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <form id="form-hapus" action="" method="POST" >
+                    @csrf @method('delete')
+                    <button type="submit" class="btn btn-white">Yakin</button>
+                </form>
+                <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Tidak</button>
+            </div>
+
         </div>
     </div>
 </div>
