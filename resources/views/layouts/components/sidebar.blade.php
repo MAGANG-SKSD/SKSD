@@ -115,21 +115,24 @@
                 </a>
             </li> --}}
             @if(Auth::user()->role == 'administrator')
-            <li class="nav-item">
-                <a class="nav-link @if (Request::segment(1) == 'kelola-hak-akses' || Request::segment(1) == 'tambah-hak-akses' || Request::segment(1) == 'hak-akses') active @endif"
-                    href="{{ route('hak-akses.index') }}">
-                    <i class="fas fa-user-shield text-cyan"></i>
-                    <span class="nav-link-inner--text">Kelola Hak Akses</span>
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a class="nav-link @if (Request::segment(1) == 'berita') active @endif"
-                    href="{{ route('dusun.index') }}">
-                    <i class="fas fa-archive" style="color: rgb(16, 177, 161);"></i>
-                    <span class="nav-link-inner--text">Laporan Realisasi</span>
-                </a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link @if (Request::segment(1) == 'kelola-hak-akses' || Request::segment(1) == 'tambah-hak-akses' || Request::segment(1) == 'hak-akses') active @endif"
+                        href="{{ route('hak-akses.index') }}">
+                        <i class="fas fa-user-shield text-cyan"></i>
+                        <span class="nav-link-inner--text">Kelola Hak Akses</span>
+                    </a>
+                </li>
+            @endif
+            @if(Auth::user()->role == 'administrator' || Auth::user()->role == 'lurah')
+                <li class="nav-item">
+                    <a class="nav-link @if (Request::segment(1) == 'berita') active @endif"
+                        href="{{ route('dusun.index') }}">
+                        <i class="fas fa-archive" style="color: rgb(16, 177, 161);"></i>
+                        <span class="nav-link-inner--text">Laporan Realisasi</span>
+                    </a>
+                </li>
+            @endif
+            @if(Auth::user()->role == 'administrator')
             <li class="nav-item">
                 <a class="nav-link @if (Request::segment(1) == 'slider') active @endif"
                     href="{{ route('slider.index') }}">

@@ -15,9 +15,9 @@ use App\Http\Controllers\HakAksesController;
 
 Route::group(['middleware' => ['web', 'auth']], function () {
     // Rute untuk kelola hak akses
-    Route::get('/kelola-hak-akses', [HakAksesController::class, 'index'])->name('hak-akses.index');
-    Route::get('/tambah-hak-akses', [HakAksesController::class, 'create'])->name('hak-akses.create');
-    Route::get('/edit-hak-akses/{id}', [HakAksesController::class, 'edit'])->name('hak-akses.edit');
+    Route::get('/kelola-hak-akses', [HakAksesController::class, 'index'])->name('hak-akses.index')->middleware('auth','admin');
+    Route::get('/tambah-hak-akses', [HakAksesController::class, 'create'])->name('hak-akses.create')->middleware('auth','admin');
+    Route::get('/edit-hak-akses/{id}', [HakAksesController::class, 'edit'])->name('hak-akses.edit')->middleware('auth','admin');
     Route::post('/hak-akses', [HakAksesController::class, 'store'])->name('hak-akses.store');
     Route::patch('/hak-akses/{id}', [HakAksesController::class, 'update'])->name('.update');
     Route::delete('/hak-akses/{id}', [HakAksesController::class, 'destroy'])->name('hak-akses.destroy');
@@ -75,8 +75,8 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::get('/kelola-gallery', 'GalleryController@index')->name('gallery.index');
     Route::resource('/gallery', 'GalleryController')->except('index', 'show', 'edit', 'update', 'create');
 
-    Route::get('/tambah-slider', 'GalleryController@create')->name('slider.create');
-    Route::get('/slider', 'GalleryController@indexSlider')->name('slider.index');
+    Route::get('/tambah-slider', 'GalleryController@create')->name('slider.create')->middleware('auth','admin');
+    Route::get('/slider', 'GalleryController@indexSlider')->name('slider.index')->middleware('auth','admin');
 
     Route::post('/video', 'VideoController@store')->name('video.store');
     Route::patch('/video/update', 'VideoController@update')->name('video.update');
@@ -100,9 +100,10 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     });
     Route::resource('anggaran-realisasi', 'AnggaranRealisasiController')->except('create', 'show');
 
-    Route::get('/tambah-dusun', 'DusunController@create')->name('dusun.create');
-    Route::resource('dusun', 'DusunController')->except('create', 'show');
-    Route::resource('detailDusun', 'DetailDusunController')->except('create', 'edit');
+    // Laporan Realisasi
+    Route::get('/tambah-dusun', 'DusunController@create')->name('dusun.create')->middleware('auth','admin','lurah');
+    Route::resource('dusun', 'DusunController')->except('create', 'show')->middleware('auth','admin','lurah');
+    Route::resource('detailDusun', 'DetailDusunController')->except('create', 'edit')->middleware('auth','admin','lurah');
 
     Route::get('/chart-surat/{id}', 'SuratController@chartSurat')->name('chart-surat');
 });
