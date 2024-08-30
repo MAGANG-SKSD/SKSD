@@ -95,15 +95,12 @@ $desa = App\Desa::find(1);
                                 <i class="fas fa-bars"></i> <span class="nav-link-inner--text">Menu Utama</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right py-0 overflow-hidden">
-                                <a class="dropdown-item @if (Request::segment(1) == 'layanan-surat') active @endif"
-                                    href="{{ route('layanan-surat') }}">
-                                    <i class="fas fa-fw fa-file-alt text-yellow"></i>
-                                    <span class="nav-link-inner--text">Layanan Surat</span>
+                                <a class="dropdown-item" href="{{ route('dusun.index') }}">
+                                    <i class="fas fa-archive" style="color: rgb(16, 177, 161);"></i> Laporan Realisasi
                                 </a>
-                                <a class="dropdown-item @if (Request::segment(1) == 'pemerintahan-desa') active @endif"
-                                    href="{{ route('pemerintahan-desa') }}">
-                                    <i class="fas fa-fw fa-atlas text-success"></i>
-                                    <span class="nav-link-inner--text">Pemerintahan Desa</span>
+                                <a class="dropdown-item"
+                                    href="{{ url('anggaran-realisasi?jenis=pendapatan&tahun='.date('Y')) }}">
+                                    <i class="fas fa-fw fa-coins text-success"></i> Kelola APBDes
                                 </a>
                                 @guest
                                 <li class="nav-item">
@@ -154,31 +151,20 @@ $desa = App\Desa::find(1);
                                 {{-- <a class="dropdown-item" href="{{ route('dusun.index') }}">
                                     <i class="fas fa-fw fa-map-marker-alt text-yellow"></i> Kelola Dusun
                                 </a> --}}
-                                <a class="dropdown-item"
-                                    href="{{ url('anggaran-realisasi?jenis=pendapatan&tahun='.date('Y')) }}">
-                                    <i class="fas fa-fw fa-coins text-success"></i> Kelola APBDes
-                                </a>
+                                
                                 <a class="dropdown-item" href="{{ route('surat.index') }}">
                                     <i class="fas fa-fw fa-file-alt text-primary"></i> Kelola Surat
                                 </a>
-                                @if(Auth::user()->role == 'administrator')
-                                <a href="{{ route('hak-akses.index') }}" class="dropdown-item">
-                                    <i class="fas fa-fw fa-atlas text-success"></i> Kelola Hak Akses
-                                </a>
-                                @endif
+                                {{-- <a href="{{ route('pemerintahan-desa.index') }}" class="dropdown-item">
+                                    <i class="fas fa-fw fa-atlas text-success"></i> Kelola Informasi Pemerintahan Desa
+                                </a> --}}
                                 {{-- <a href="{{ route('hak-akses.index') }}" class="dropdown-item">
                                     <i class="fas fa-fw fa-newspaper text-cyan"></i> Kelola Berita
                                 </a> --}}
-                                @if(Auth::user()->role == 'administrator' || Auth::user()->role == 'lurah')
-                                <a class="dropdown-item" href="{{ route('dusun.index') }}">
-                                    <i class="fas fa-archive" style="color: rgb(16, 177, 161);"></i> Laporan Realisasi
-                                </a>
-                                @endif
-                                @if(Auth::user()->role == 'administrator')
+                                
                                 <a class="dropdown-item" href="{{ route('slider.index') }}">
                                     <i class="fas fa-fw fa-images text-purple"></i> Kelola Slider
                                 </a>
-                                @endif
                                 <a class="dropdown-item" href="{{ route('profil-desa') }}">
                                     <i class="fas fa-fw fa-users text-info"></i> Profil Desa
                                 </a>
